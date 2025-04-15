@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "wishlistOf": "{name}'s Wishlist",
+    "defaultDescription": "Check out the items and make a special surprise"
+  },
+  "infoBar": {
+    "reservationInfo": "When you reserve an item, others will know it's already being purchased"
+  },
+  "categories": {
+    "itemCount": "{count} {count, plural, =1 {item} other {items}}"
+  },
+  "itemActions": {
+    "reserve": "Reserve",
+    "reserved": "Reserved by {name}",
+    "viewStore": "View in store"
+  },
+  "emptyState": {
+    "title": "No items in this list yet",
+    "description": "This wishlist doesn't have any items yet. Check back later for updates."
+  },
+  "reserveModal": {
+    "title": "Reserve Item",
+    "enterName": "To reserve this item, please enter your name:",
+    "namePlaceholder": "Your name",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "notFound": {
+    "title": "List not found",
+    "description": "This list doesn't exist or is not publicly available."
+  }
+} 

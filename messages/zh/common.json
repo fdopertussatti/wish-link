@@ -1,0 +1,111 @@
+{
+  "app": {
+    "name": "WishLink",
+    "tagline": "您的愿望，一处整理"
+  },
+  "navigation": {
+    "home": "首页",
+    "myLists": "我的清单",
+    "howItWorks": "使用方法",
+    "login": "登录",
+    "signup": "注册"
+  },
+  "actions": {
+    "create": "创建",
+    "edit": "编辑",
+    "delete": "删除",
+    "save": "保存",
+    "cancel": "取消",
+    "share": "分享",
+    "add": "添加",
+    "reserve": "预定",
+    "buy": "购买",
+    "confirm": "确认",
+    "viewStore": "查看商店",
+    "createList": "创建清单",
+    "addItem": "添加物品",
+    "seeAll": "查看全部"
+  },
+  "labels": {
+    "name": "名称",
+    "description": "描述",
+    "price": "价格",
+    "category": "类别",
+    "priority": "优先级",
+    "link": "链接",
+    "image": "图片",
+    "reserved": "已预定",
+    "reservedBy": "被 {name} 预定",
+    "emptyState": "未找到物品",
+    "tryAdjustFilters": "尝试调整筛选条件以查看更多物品",
+    "startAddingItems": "开始添加您的第一个物品到清单",
+    "addFirstItem": "添加第一个物品",
+    "copyLink": "链接已复制到剪贴板！",
+    "yourName": "您的姓名",
+    "createWishList": "创建我的清单",
+    "getStarted": "立即开始",
+    "viewType": {
+      "grid": "网格",
+      "list": "列表"
+    }
+  },
+  "categories": {
+    "all": "全部",
+    "electronics": "电子产品",
+    "books": "图书",
+    "fashion": "时尚",
+    "home": "家居",
+    "games": "游戏",
+    "other": "其他"
+  },
+  "priorities": {
+    "all": "全部",
+    "high": "高",
+    "medium": "中",
+    "low": "低"
+  },
+  "reserveModal": {
+    "title": "预定物品",
+    "enterName": "要预订此物品，请输入您的姓名：",
+    "placeholder": "您的姓名"
+  },
+  "emptyStates": {
+    "noItems": "暂无物品",
+    "noItemsInList": "这个愿望清单还没有物品。稍后再来查看是否有更新。",
+    "noLists": "暂无愿望清单",
+    "createFirstList": "创建您的第一个愿望清单开始整理您的愿望"
+  },
+  "shared": {
+    "info": "当您预定一个物品时，其他人会知道它已经在被购买了",
+    "notFound": "清单未找到",
+    "notFoundDescription": "此清单不存在或不公开可用。",
+    "wishlistOf": "{name}的愿望清单",
+    "checkItems": "查看物品并制造一个特别的惊喜"
+  },
+  "footer": {
+    "allRightsReserved": "版权所有"
+  },
+  "buttons": {
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "share": "分享",
+    "create": "创建",
+    "add": "添加",
+    "remove": "移除"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "success": "成功！",
+    "empty": "未找到项目",
+    "confirmDelete": "确定要删除吗？",
+    "yes": "是",
+    "no": "否",
+    "public": "公开",
+    "private": "私密",
+    "item": "项目",
+    "items": "项目"
+  }
+} 

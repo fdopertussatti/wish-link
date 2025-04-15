@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "title": "Seus <em>desejos</em>, organizados em um só lugar",
+    "subtitle": "Crie listas personalizadas, compartilhe com quem você ama, e evite presentes duplicados ou indesejados."
+  },
+  "cta": {
+    "primary": "Criar Minha Lista",
+    "secondary": "Como funciona"
+  },
+  "features": {
+    "title": "Organize seus desejos",
+    "subtitle": "Tudo o que você precisa para uma lista de desejos perfeita",
+    "description": "Com WishLink, criar e compartilhar listas de desejos nunca foi tão fácil e elegante.",
+    "items": [
+      {
+        "title": "Fácil de Criar",
+        "description": "Cole o link de qualquer produto da web e nós preenchemos automaticamente os detalhes para você."
+      },
+      {
+        "title": "Compartilhe",
+        "description": "Compartilhe sua lista com amigos e família através de um link único. Acesso fácil em qualquer dispositivo."
+      },
+      {
+        "title": "Evite Duplicados",
+        "description": "Quando alguém reserva um item, ele fica marcado para todos, evitando presentes duplicados."
+      }
+    ]
+  },
+  "showcase": {
+    "title": "Design elegante e intuitivo",
+    "description": "Nossas listas de desejos são visualmente atraentes e fáceis de navegar. Organize por categorias, defina prioridades e adicione detalhes que ajudam seus amigos a encontrar o presente perfeito.",
+    "featureList": [
+      "Adicione itens com preço, imagem e link para compra",
+      "Defina prioridades para cada item",
+      "Organize em categorias para fácil navegação",
+      "Design responsivo para desktop e mobile"
+    ]
+  },
+  "callToAction": {
+    "title": "Pronto para organizar seus desejos?",
+    "description": "Crie sua primeira lista em menos de um minuto. É grátis, fácil e não precisa de cadastro.",
+    "button": "Começar agora",
+    "freeTag": "Gratuito",
+    "benefits": [
+      "Listas ilimitadas",
+      "Itens ilimitados",
+      "Compartilhamento facilitado"
+    ]
+  }
+} 

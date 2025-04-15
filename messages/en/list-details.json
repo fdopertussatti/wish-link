@@ -1,0 +1,40 @@
+{
+  "filters": {
+    "label": "Filters",
+    "category": "Category",
+    "priority": "Priority",
+    "viewAs": "View as"
+  },
+  "itemForm": {
+    "title": {
+      "new": "New Item",
+      "edit": "Edit Item"
+    },
+    "name": "Item Name",
+    "namePlaceholder": "Enter the item name",
+    "description": "Description (optional)",
+    "descriptionPlaceholder": "Add more details about this item",
+    "price": "Price (optional)",
+    "pricePlaceholder": "0.00",
+    "link": "Purchase Link (optional)",
+    "linkPlaceholder": "https://...",
+    "imageUrl": "Image URL (optional)",
+    "imageUrlPlaceholder": "https://...",
+    "category": "Category",
+    "priority": "Priority",
+    "button": "Save Item"
+  },
+  "itemActions": {
+    "reserve": "Reserve",
+    "reserved": "Reserved",
+    "buy": "Buy",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "deleteConfirm": {
+    "title": "Delete Item?",
+    "description": "Are you sure you want to delete this item? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Yes, Delete"
+  }
+} 

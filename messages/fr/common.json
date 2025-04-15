@@ -1,0 +1,111 @@
+{
+  "app": {
+    "name": "WishLink",
+    "tagline": "Vos souhaits, organisés en un seul endroit"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "myLists": "Mes Listes",
+    "howItWorks": "Comment Ça Marche",
+    "login": "Se Connecter",
+    "signup": "S'inscrire"
+  },
+  "actions": {
+    "create": "Créer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "share": "Partager",
+    "add": "Ajouter",
+    "reserve": "Réserver",
+    "buy": "Acheter",
+    "confirm": "Confirmer",
+    "viewStore": "Voir en boutique",
+    "createList": "Créer une Liste",
+    "addItem": "Ajouter un Article",
+    "seeAll": "Voir Tout"
+  },
+  "labels": {
+    "name": "Nom",
+    "description": "Description",
+    "price": "Prix",
+    "category": "Catégorie",
+    "priority": "Priorité",
+    "link": "Lien",
+    "image": "Image",
+    "reserved": "Réservé",
+    "reservedBy": "Réservé par {name}",
+    "emptyState": "Aucun article trouvé",
+    "tryAdjustFilters": "Essayez d'ajuster les filtres pour voir plus d'articles",
+    "startAddingItems": "Commencez par ajouter votre premier article à la liste",
+    "addFirstItem": "Ajouter Premier Article",
+    "copyLink": "Lien copié dans le presse-papiers !",
+    "yourName": "Votre nom",
+    "createWishList": "Créer Ma Liste",
+    "getStarted": "Commencer Maintenant",
+    "viewType": {
+      "grid": "Grille",
+      "list": "Liste"
+    }
+  },
+  "categories": {
+    "all": "Toutes",
+    "electronics": "Électronique",
+    "books": "Livres",
+    "fashion": "Mode",
+    "home": "Maison",
+    "games": "Jeux",
+    "other": "Autres"
+  },
+  "priorities": {
+    "all": "Toutes",
+    "high": "Haute",
+    "medium": "Moyenne",
+    "low": "Basse"
+  },
+  "reserveModal": {
+    "title": "Réserver l'Article",
+    "enterName": "Pour réserver cet article, veuillez entrer votre nom :",
+    "placeholder": "Votre nom"
+  },
+  "emptyStates": {
+    "noItems": "Pas encore d'articles",
+    "noItemsInList": "Cette liste de souhaits n'a pas encore d'articles. Revenez plus tard pour voir s'il y a des nouveautés.",
+    "noLists": "Pas encore de listes de souhaits",
+    "createFirstList": "Créez votre première liste de souhaits pour commencer à organiser vos désirs"
+  },
+  "shared": {
+    "info": "Quand vous réservez un article, les autres sauront qu'il est déjà en cours d'achat",
+    "notFound": "Liste non trouvée",
+    "notFoundDescription": "Cette liste n'existe pas ou n'est pas disponible publiquement.",
+    "wishlistOf": "Liste de Souhaits de {name}",
+    "checkItems": "Consultez les articles et faites une surprise spéciale"
+  },
+  "footer": {
+    "allRightsReserved": "Tous droits réservés"
+  },
+  "buttons": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "share": "Partager",
+    "create": "Créer",
+    "add": "Ajouter",
+    "remove": "Retirer"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "success": "Succès !",
+    "empty": "Aucun élément trouvé",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ceci ?",
+    "yes": "Oui",
+    "no": "Non",
+    "public": "Publique",
+    "private": "Privée",
+    "item": "article",
+    "items": "articles"
+  }
+} 

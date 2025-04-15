@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "title": "Vos <em>souhaits</em>, organisés en un seul endroit",
+    "subtitle": "Créez des listes personnalisées, partagez-les avec vos proches, et évitez les cadeaux en double ou non désirés."
+  },
+  "cta": {
+    "primary": "Créer Ma Liste",
+    "secondary": "Comment ça marche"
+  },
+  "features": {
+    "title": "Organisez vos souhaits",
+    "subtitle": "Tout ce dont vous avez besoin pour une liste de souhaits parfaite",
+    "description": "Avec WishLink, créer et partager des listes de souhaits n'a jamais été aussi facile et élégant.",
+    "items": [
+      {
+        "title": "Facile à Créer",
+        "description": "Collez le lien de n'importe quel produit du web et nous remplissons automatiquement les détails pour vous."
+      },
+      {
+        "title": "Partagez",
+        "description": "Partagez votre liste avec vos amis et votre famille via un lien unique. Accès facile sur n'importe quel appareil."
+      },
+      {
+        "title": "Évitez les Doublons",
+        "description": "Quand quelqu'un réserve un article, il est marqué pour tout le monde, évitant les cadeaux en double."
+      }
+    ]
+  },
+  "showcase": {
+    "title": "Design élégant et intuitif",
+    "description": "Nos listes de souhaits sont visuellement attrayantes et faciles à naviguer. Organisez par catégories, définissez des priorités et ajoutez des détails qui aident vos amis à trouver le cadeau parfait.",
+    "featureList": [
+      "Ajoutez des articles avec prix, image et lien d'achat",
+      "Définissez des priorités pour chaque article",
+      "Organisez en catégories pour une navigation facile",
+      "Design réactif pour ordinateur et mobile"
+    ]
+  },
+  "callToAction": {
+    "title": "Prêt à organiser vos souhaits ?",
+    "description": "Créez votre première liste en moins d'une minute. C'est gratuit, facile et ne nécessite pas d'inscription.",
+    "button": "Commencer maintenant",
+    "freeTag": "Gratuit",
+    "benefits": [
+      "Listes illimitées",
+      "Articles illimités",
+      "Partage facilité"
+    ]
+  }
+} 
