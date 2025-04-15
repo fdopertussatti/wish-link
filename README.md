@@ -8,7 +8,7 @@ WishLink é uma aplicação web moderna para criar e gerenciar listas de desejos
 - 🔄 Visualização em grid ou lista
 - 🔗 Compartilhamento fácil de listas
 - 🎯 Adição de produtos com preços e links
-- 🌐 Suporte a múltiplos idiomas (Português e Inglês)
+- 🌐 Suporte a múltiplos idiomas (Português, Inglês e Espanhol)
 - 📱 Design responsivo para todos os dispositivos
 - 🔍 Busca e filtros de produtos
 - 🎨 Interface moderna e intuitiva
@@ -73,6 +73,16 @@ O projeto está configurado para deploy na Vercel. Para fazer o deploy:
 3. Configure as variáveis de ambiente
 4. Deploy automático será feito a cada push na branch main
 
+## 🌍 Idiomas Suportados
+
+O WishLink suporta os seguintes idiomas:
+
+- 🇧🇷 Português (Brasil) - Idioma padrão
+- 🇺🇸 Inglês (Estados Unidos)
+- 🇪🇸 Espanhol
+
+A detecção automática de idioma está habilitada, mas os usuários podem alternar manualmente entre os idiomas disponíveis através do seletor de idioma na interface.
+
 ## 📝 Estrutura do Projeto
 
 ```
@@ -99,7 +109,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👥 Autores
 
-- **Fernando Doper Tussatti** - *Desenvolvimento inicial* - [fdopertussatti](https://github.com/fdopertussatti)
+- **Fernando Pertussatti** - *Desenvolvimento inicial* - [fdopertussatti](https://github.com/fdopertussatti)
 
 ## 🙏 Agradecimentos
 
