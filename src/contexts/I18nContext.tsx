@@ -8,6 +8,7 @@ interface I18nContextType {
   t: (key: string, namespace?: string, params?: Record<string, string | number>) => string;
   changeLocale: (locale: string) => void;
   availableLocales: { code: string; name: string }[];
+  isLoading: boolean;
 }
 
 const availableLocales = [
@@ -29,9 +30,17 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
   const pathname = usePathname();
   const [locale, setLocale] = useState<string>('en');
   const [messages, setMessages] = useState<Record<string, any>>(initialMessages);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Detect browser language
+    // Primeiro verificar localStorage para preferência salva
+    const storedLocale = localStorage.getItem('preferredLocale');
+    if (storedLocale && availableLocales.some(loc => loc.code === storedLocale)) {
+      setLocale(storedLocale);
+      return;
+    }
+    
+    // Se não houver preferência salva, detectar idioma do navegador
     const browserLang = navigator.language;
     const detectedLocale = availableLocales.find(loc => 
       browserLang.startsWith(loc.code)
@@ -42,6 +51,7 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
 
   useEffect(() => {
     async function loadMessages() {
+      setIsLoading(true);
       try {
         // Load common messages
         const commonModule = await import(`../../messages/${locale}/common.json`);
@@ -77,6 +87,8 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
         });
       } catch (e) {
         console.error('Failed to load messages', e);
+      } finally {
+        setIsLoading(false);
       }
     }
     
@@ -97,6 +109,11 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
 
   // Translation function
   const t = (key: string, namespace = 'common', params?: Record<string, string | number>): string => {
+    // If messages are not loaded yet, return empty string to avoid flashing
+    if (!messages || !messages[namespace]) {
+      return '';
+    }
+    
     // Split the key by dots to access nested properties
     const keys = key.split('.');
     
@@ -106,9 +123,9 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
     // Navigate through the object using the keys
     let result = keys.reduce((obj, k) => (obj && obj[k] !== undefined ? obj[k] : undefined), namespaceObj);
     
-    // If no translation found, return the key
+    // If no translation found, return empty string to avoid flashing
     if (result === undefined) {
-      return key;
+      return '';
     }
     
     // If the result is a string and there are parameters, replace the placeholders
@@ -122,8 +139,8 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
   };
 
   return (
-    <I18nContext.Provider value={{ locale, t, changeLocale, availableLocales }}>
-      {children}
+    <I18nContext.Provider value={{ locale, t, changeLocale, availableLocales, isLoading }}>
+      {!isLoading && children}
     </I18nContext.Provider>
   );
 }

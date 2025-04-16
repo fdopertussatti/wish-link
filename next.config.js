@@ -16,6 +16,11 @@ const nextConfig = {
       'images-americas.ssl-images-amazon.com'
     ],
   },
+  i18n: {
+    locales: ['en', 'pt-BR', 'es', 'fr', 'zh'],
+    defaultLocale: 'en',
+    localeDetection: false
+  }
 }
 
 module.exports = nextConfig 

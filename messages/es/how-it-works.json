@@ -1,0 +1,76 @@
+{
+  "hero": {
+    "title": "Cómo funciona <em>WishLink</em>",
+    "subtitle": "Aprende a crear, gestionar y compartir tus listas de deseos en unos sencillos pasos."
+  },
+  "steps": [
+    {
+      "number": "01",
+      "title": "Crea tu lista",
+      "description": "Elige un nombre para tu lista y añade una descripción opcional. Puedes crear tantas listas como quieras."
+    },
+    {
+      "number": "02",
+      "title": "Añade artículos",
+      "description": "Añade productos pegando el enlace de la tienda o rellenando manualmente. Establece prioridades y categorías."
+    },
+    {
+      "number": "03",
+      "title": "Comparte",
+      "description": "Genera un enlace único y compártelo con amigos y familiares a través de cualquier canal de comunicación."
+    },
+    {
+      "number": "04",
+      "title": "Sin regalos duplicados",
+      "description": "Cuando alguien reserva un artículo, se marca como reservado para todos, evitando duplicaciones."
+    }
+  ],
+  "workflow": {
+    "title": "Flujo completo",
+    "subtitle": "Mira lo sencillo que es usar WishLink de principio a fin.",
+    "phases": [
+      {
+        "title": "Creación",
+        "description": "Crea tu lista y añade los productos de tus sueños con toda la información."
+      },
+      {
+        "title": "Compartir",
+        "description": "Comparte el enlace único con amigos y familiares a través de WhatsApp, correo electrónico o redes sociales."
+      },
+      {
+        "title": "Reservas",
+        "description": "Tus amigos pueden reservar artículos, que se marcan para evitar regalos duplicados."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "questions": [
+      {
+        "question": "¿Necesito crear una cuenta?",
+        "answer": "No, WishLink no requiere registro. Tus listas se almacenan localmente en tu navegador."
+      },
+      {
+        "question": "¿Cuánto cuesta usar WishLink?",
+        "answer": "WishLink es completamente gratuito y sin restricciones de uso."
+      },
+      {
+        "question": "¿Dónde se almacenan mis datos?",
+        "answer": "Tus datos se almacenan localmente en tu navegador a través de localStorage."
+      },
+      {
+        "question": "¿Puedo acceder a mi lista desde otro dispositivo?",
+        "answer": "Al usar almacenamiento local, tus listas solo están disponibles en el dispositivo donde se crearon. Comparte el enlace para que otros puedan verla."
+      },
+      {
+        "question": "¿Es posible editar una lista después de crearla?",
+        "answer": "Sí, puedes añadir, editar y eliminar artículos en cualquier momento."
+      }
+    ]
+  },
+  "cta": {
+    "title": "¿Listo para crear tu lista?",
+    "description": "Comienza ahora y organiza tus deseos en un solo lugar",
+    "button": "Crear Mi Lista"
+  }
+} 

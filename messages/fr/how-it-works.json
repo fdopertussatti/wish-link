@@ -1,0 +1,76 @@
+{
+  "hero": {
+    "title": "Comment fonctionne <em>WishLink</em>",
+    "subtitle": "Apprenez à créer, gérer et partager vos listes de souhaits en quelques étapes simples."
+  },
+  "steps": [
+    {
+      "number": "01",
+      "title": "Créez votre liste",
+      "description": "Choisissez un nom pour votre liste et ajoutez une description optionnelle. Vous pouvez créer autant de listes que vous le souhaitez."
+    },
+    {
+      "number": "02",
+      "title": "Ajoutez des articles",
+      "description": "Ajoutez des produits en collant le lien du magasin ou en remplissant manuellement. Définissez des priorités et des catégories."
+    },
+    {
+      "number": "03",
+      "title": "Partagez",
+      "description": "Générez un lien unique et partagez-le avec vos amis et votre famille via n'importe quel canal de communication."
+    },
+    {
+      "number": "04",
+      "title": "Pas de cadeaux en double",
+      "description": "Lorsqu'une personne réserve un article, il est marqué comme réservé pour tous, évitant ainsi les doublons."
+    }
+  ],
+  "workflow": {
+    "title": "Processus complet",
+    "subtitle": "Découvrez la simplicité d'utilisation de WishLink du début à la fin.",
+    "phases": [
+      {
+        "title": "Création",
+        "description": "Créez votre liste et ajoutez les produits de vos rêves avec toutes les informations."
+      },
+      {
+        "title": "Partage",
+        "description": "Partagez le lien unique avec vos amis et votre famille via WhatsApp, e-mail ou les réseaux sociaux."
+      },
+      {
+        "title": "Réservations",
+        "description": "Vos amis peuvent réserver des articles, qui sont marqués pour éviter les cadeaux en double."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "questions": [
+      {
+        "question": "Dois-je créer un compte ?",
+        "answer": "Non, WishLink ne nécessite pas d'inscription. Vos listes sont stockées localement dans votre navigateur."
+      },
+      {
+        "question": "Combien coûte l'utilisation de WishLink ?",
+        "answer": "WishLink est entièrement gratuit et sans restriction d'utilisation."
+      },
+      {
+        "question": "Où sont stockées mes données ?",
+        "answer": "Vos données sont stockées localement dans votre navigateur via localStorage."
+      },
+      {
+        "question": "Puis-je accéder à ma liste depuis un autre appareil ?",
+        "answer": "En utilisant le stockage local, vos listes ne sont disponibles que sur l'appareil où elles ont été créées. Partagez le lien pour que d'autres puissent la voir."
+      },
+      {
+        "question": "Est-il possible de modifier une liste après l'avoir créée ?",
+        "answer": "Oui, vous pouvez ajouter, modifier et supprimer des articles à tout moment."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Prêt à créer votre liste ?",
+    "description": "Commencez maintenant et organisez vos souhaits en un seul endroit",
+    "button": "Créer Ma Liste"
+  }
+} 
