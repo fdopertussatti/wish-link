@@ -16,10 +16,7 @@ export default function SignIn() {
     console.log('Debug - Loading state:', isLoading);
     console.log('Debug - Available messages:', messages);
     console.log('Debug - Auth messages:', messages?.auth);
-    console.log('Debug - Auth signin title:', messages?.auth?.signin?.title);
-    console.log('Debug - Auth signin description:', messages?.auth?.signin?.description);
-    console.log('Debug - Translation test:', t('signin.title', 'auth'));
-  }, [locale, isLoading, messages, t]);
+  }, [locale, isLoading, messages]);
 
   if (isLoading) {
     return (
@@ -30,16 +27,16 @@ export default function SignIn() {
   }
 
   // Verificar se as traduções estão disponíveis
-  const title = t('signin.title', 'auth') || 'Sign in to your account';
-  const description = t('signin.description', 'auth') || 'Continue with one of the options below';
-  const appName = t('app.name', 'common') || 'WishLink';
-  const googleText = t('signin.google', 'auth') || 'Continue with Google';
-  const facebookText = t('signin.facebook', 'auth') || 'Continue with Facebook';
-  const appleText = t('signin.apple', 'auth') || 'Continue with Apple';
-  const orText = t('signin.or', 'auth') || 'or';
-  const noAccountText = t('signin.noAccount', 'auth') || "Don't have an account?";
-  const createAccountText = t('signin.createAccount', 'auth') || 'Create account';
-  const termsText = t('signin.terms', 'auth') || 'By continuing, you agree to our Terms of Use and Privacy Policy';
+  const title = t('auth.signin.title') || 'Sign in to your account';
+  const description = t('auth.signin.description') || 'Continue with one of the options below';
+  const appName = t('common.app.name') || 'WishLink';
+  const googleText = t('auth.signin.google') || 'Continue with Google';
+  const facebookText = t('auth.signin.facebook') || 'Continue with Facebook';
+  const appleText = t('auth.signin.apple') || 'Continue with Apple';
+  const orText = t('auth.signin.or') || 'or';
+  const noAccountText = t('auth.signin.noAccount') || "Don't have an account?";
+  const createAccountText = t('auth.signin.createAccount') || 'Create account';
+  const termsText = t('auth.signin.terms') || 'By continuing, you agree to our Terms of Use and Privacy Policy';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
