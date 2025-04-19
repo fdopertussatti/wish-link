@@ -10,13 +10,17 @@ export default withAuth(
     callbacks: {
       authorized: ({ token }) => !!token,
     },
+    pages: {
+      signIn: '/auth/signin',
+    },
   }
 );
 
 export const config = {
   matcher: [
     '/listas/:path*',
-    '/onboarding',
+    '/compartilhado/:path*',
     '/perfil/:path*',
+    '/configuracoes/:path*'
   ],
 }; 

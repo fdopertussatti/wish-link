@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { useWishList } from '@/contexts/WishListContext';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
@@ -10,9 +12,17 @@ import { WishListForm } from '@/components/forms/WishListForm';
 import { NewWishList } from '@/types';
 
 export default function WishLists() {
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const { wishLists, addWishList } = useWishList();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth/signin');
+    }
+  }, [status, router]);
 
   const handleCreateList = (data: NewWishList) => {
     addWishList({
@@ -21,6 +31,18 @@ export default function WishLists() {
     });
     setIsModalOpen(false);
   };
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      </div>
+    );
+  }
+
+  if (status === 'unauthenticated') {
+    return null; // Will redirect in useEffect
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

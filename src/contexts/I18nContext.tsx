@@ -227,7 +227,9 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
         messages,
       }}
     >
-      {children}
+      <div suppressHydrationWarning>
+        {children}
+      </div>
     </I18nContext.Provider>
   );
 }
