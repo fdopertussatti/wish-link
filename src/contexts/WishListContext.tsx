@@ -22,21 +22,31 @@ interface WishListContextType {
 const WishListContext = createContext<WishListContextType | undefined>(undefined);
 
 export function WishListProvider({ children }: { children: ReactNode }) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [wishLists, setWishLists] = useLocalStorage<WishList[]>('wishLists', []);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Carregar dados do usuário quando a sessão mudar
-    if (session?.user) {
-      // TODO: Substituir por chamada à API quando implementada
-      const userWishLists = wishLists.filter(list => list.userId === session.user.id);
-      setWishLists(userWishLists.length > 0 ? userWishLists : [sampleWishList]);
-    } else {
-      setWishLists([]);
-    }
-    setIsLoading(false);
-  }, [session]);
+    const loadWishLists = async () => {
+      setIsLoading(true);
+      try {
+        if (session?.user) {
+          // TODO: Substituir por chamada à API quando implementada
+          const userWishLists = wishLists.filter(list => list.userId === session.user.id);
+          setWishLists(userWishLists.length > 0 ? userWishLists : [sampleWishList]);
+        } else if (status === 'unauthenticated') {
+          setWishLists([]);
+        }
+      } catch (error) {
+        console.error('Error loading wishlists:', error);
+        setWishLists([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadWishLists();
+  }, [session, status]);
 
   const addWishList = (wishList: Omit<WishList, 'id' | 'createdAt'>) => {
     if (!session?.user) return;
@@ -47,7 +57,7 @@ export function WishListProvider({ children }: { children: ReactNode }) {
       createdAt: Date.now(),
       userId: session.user.id
     };
-    setWishLists([...wishLists, newWishList]);
+    setWishLists(prevLists => [...prevLists, newWishList]);
   };
 
   const updateWishList = (updatedList: WishList) => {

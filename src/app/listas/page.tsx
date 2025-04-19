@@ -13,10 +13,17 @@ import { NewWishList } from '@/types';
 
 export default function WishLists() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/auth/signin?callbackUrl=/listas');
+    },
+  });
   const { wishLists, isLoading: isLoadingWishLists, addWishList } = useWishList();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
+
+  const isLoading = status === 'loading' || isLoadingWishLists;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -33,7 +40,7 @@ export default function WishLists() {
     setIsModalOpen(false);
   };
 
-  if (status === 'loading' || isLoadingWishLists) {
+  if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="animate-pulse">
@@ -54,8 +61,8 @@ export default function WishLists() {
     );
   }
 
-  if (status === 'unauthenticated') {
-    return null; // Will redirect in useEffect
+  if (!session) {
+    return null;
   }
 
   return (
