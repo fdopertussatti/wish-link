@@ -1,12 +1,14 @@
 'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 import { WishList, WishItem } from '@/types';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { sampleWishList } from '@/utils/sampleData';
+import { useSession } from 'next-auth/react';
 
 interface WishListContextType {
   wishLists: WishList[];
+  isLoading: boolean;
   addWishList: (wishList: Omit<WishList, 'id' | 'createdAt'>) => void;
   updateWishList: (wishList: WishList) => void;
   deleteWishList: (id: string) => void;
@@ -20,13 +22,30 @@ interface WishListContextType {
 const WishListContext = createContext<WishListContextType | undefined>(undefined);
 
 export function WishListProvider({ children }: { children: ReactNode }) {
-  const [wishLists, setWishLists] = useLocalStorage<WishList[]>('wishLists', [sampleWishList]);
+  const { data: session } = useSession();
+  const [wishLists, setWishLists] = useLocalStorage<WishList[]>('wishLists', []);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Carregar dados do usuário quando a sessão mudar
+    if (session?.user) {
+      // TODO: Substituir por chamada à API quando implementada
+      const userWishLists = wishLists.filter(list => list.userId === session.user.id);
+      setWishLists(userWishLists.length > 0 ? userWishLists : [sampleWishList]);
+    } else {
+      setWishLists([]);
+    }
+    setIsLoading(false);
+  }, [session]);
 
   const addWishList = (wishList: Omit<WishList, 'id' | 'createdAt'>) => {
+    if (!session?.user) return;
+    
     const newWishList: WishList = {
       ...wishList,
       id: crypto.randomUUID(),
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      userId: session.user.id
     };
     setWishLists([...wishLists, newWishList]);
   };
@@ -108,6 +127,7 @@ export function WishListProvider({ children }: { children: ReactNode }) {
 
   const value = {
     wishLists,
+    isLoading,
     addWishList,
     updateWishList,
     deleteWishList,

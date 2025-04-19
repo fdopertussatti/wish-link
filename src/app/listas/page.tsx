@@ -14,13 +14,14 @@ import { NewWishList } from '@/types';
 export default function WishLists() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const { wishLists, addWishList } = useWishList();
+  const { wishLists, isLoading: isLoadingWishLists, addWishList } = useWishList();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.push('/auth/signin');
+      router.push('/auth/signin?callbackUrl=/listas');
+      return;
     }
   }, [status, router]);
 
@@ -32,10 +33,23 @@ export default function WishLists() {
     setIsModalOpen(false);
   };
 
-  if (status === 'loading') {
+  if (status === 'loading' || isLoadingWishLists) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      <div className="container mx-auto px-4 py-8">
+        <div className="animate-pulse">
+          <div className="h-8 w-48 bg-gray-200 rounded mb-8" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm">
+                <div className="h-48 bg-gray-200" />
+                <div className="p-4">
+                  <div className="h-6 w-3/4 bg-gray-200 rounded mb-2" />
+                  <div className="h-4 w-1/2 bg-gray-200 rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

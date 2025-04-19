@@ -5,16 +5,16 @@ export type Category = 'ELECTRONICS' | 'BOOKS' | 'FASHION' | 'HOME' | 'GAMES' | 
 export interface WishItem {
   id: string;
   name: string;
-  description?: string;
-  imageUrl?: string;
-  additionalImages?: string[];
-  price?: number;
+  description: string;
+  price: number;
+  purchaseUrl: string;
+  imageUrl: string;
+  isReserved: boolean;
+  createdAt: number;
   category: Category;
   priority: Priority;
-  isReserved: boolean;
+  additionalImages?: string[];
   reservedBy?: string;
-  purchaseUrl?: string;
-  createdAt: number;
 }
 
 export interface WishList {
@@ -29,6 +29,7 @@ export interface WishList {
     primaryColor: string;
     backgroundColor: string;
   };
+  userId: string;
 }
 
 export type NewWishList = Omit<WishList, 'id' | 'items' | 'createdAt'>;

@@ -51,6 +51,14 @@ export function Navbar() {
     setShowLogoutConfirmation(true);
   };
 
+  const handleMyLists = () => {
+    if (!session) {
+      router.push('/auth/signin?callbackUrl=/listas');
+      return;
+    }
+    router.push('/listas');
+  };
+
   if (isLoading) {
     return (
       <nav className="bg-white border-b border-gray-200">
@@ -84,18 +92,20 @@ export function Navbar() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-6">
-              {session && (
-                <Link 
-                  href="/listas"
-                  className={`text-sm font-medium ${
-                    pathname.startsWith('/listas')
-                      ? 'text-purple-600'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  {translate('navigation.myLists')}
-                </Link>
-              )}
+              <Link 
+                href="/listas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleMyLists();
+                }}
+                className={`text-sm font-medium ${
+                  pathname.startsWith('/listas')
+                    ? 'text-purple-600'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {translate('navigation.myLists')}
+              </Link>
               <Link 
                 href="/como-funciona"
                 className={`text-sm font-medium ${
@@ -156,19 +166,21 @@ export function Navbar() {
           {isMenuOpen && (
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                {session && (
-                  <Link 
-                    href="/listas"
-                    className={`block px-3 py-2 rounded-md text-base font-medium ${
-                      pathname.startsWith('/listas')
-                        ? 'text-purple-600 bg-purple-50'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {translate('navigation.myLists')}
-                  </Link>
-                )}
+                <Link 
+                  href="/listas"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleMyLists();
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    pathname.startsWith('/listas')
+                      ? 'text-purple-600 bg-purple-50'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  }`}
+                >
+                  {translate('navigation.myLists')}
+                </Link>
                 <Link 
                   href="/como-funciona"
                   className={`block px-3 py-2 rounded-md text-base font-medium ${
