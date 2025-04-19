@@ -100,9 +100,7 @@ export default function HowItWorks() {
                 const parts = part.split('</em>');
                 return (
                   <React.Fragment key={i}>
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300 font-bold">
-                      {parts[0]}
-                    </span>
+                    <em>{parts[0]}</em>
                     {parts[1]}
                   </React.Fragment>
                 );

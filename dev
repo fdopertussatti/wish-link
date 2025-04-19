@@ -1,0 +1,25 @@
+> next dev -p 3001
+
+ ⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1817:16)
+    at listenInCluster (node:net:1865:12)
+    at Server.listen (node:net:1953:7)
+    at /Users/fdopertussatti/dev/WishLink/node_modules/next/dist/server/lib/star
+    at /Users/fdopertussatti/dev/WishLink/node_modules/next/dist/server/lib/start-server.js:278:16
+    at new Promise (<anonymous>)
+    at startServer (/Users/fdopertussatti/dev/WishLink/node_modules/next/dist/se
+    at startServer (/Users/fdopertussatti/dev/WishLink/node_modules/next/dist/server/lib/start-server.js:190:11)
+    at /Users/fdopertussatti/dev/WishLink/node_modules/next/dist/server/lib/star
+    at /Users/fdopertussatti/dev/WishLink/node_modules/next/dist/server/lib/start-server.js:308:52
+    at Span.traceAsyncFn (/Users/fdopertussatti/dev/WishLink/node_modules/next/d
+    at Span.traceAsyncFn (/Users/fdopertussatti/dev/WishLink/node_modules/next/dist/trace/trace.js:151:26)
+    at process.<anonymous> (/Users/fdopertussatti/dev/WishLink/node_modules/next
+    at process.<anonymous> (/Users/fdopertussatti/dev/WishLink/node_modules/next/dist/server/lib/start-server.js:308:35)
+    at process.emit (node:events:517:28) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}

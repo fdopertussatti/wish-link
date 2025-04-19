@@ -1,11 +1,14 @@
+'use client';
+
 import { Inter } from 'next/font/google';
-import ClientLayout from '@/components/layout/ClientLayout';
+import { I18nProvider } from '@/contexts/I18nContext';
+import { SessionProvider } from 'next-auth/react';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+import { LocaleHtmlLang } from '@/components/layout/LocaleHtmlLang';
 import './globals.css';
-import { metadata } from './metadata';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export { metadata };
 
 export default function RootLayout({
   children,
@@ -13,11 +16,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+    <html>
+      <body className={inter.className}>
+        <I18nProvider>
+          <SessionProvider>
+            <LocaleHtmlLang />
+            <div className="min-h-screen flex flex-col">
+              <Navbar />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </SessionProvider>
+        </I18nProvider>
       </body>
     </html>
   );

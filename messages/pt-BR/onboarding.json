@@ -1,0 +1,17 @@
+{
+  "welcome": "Bem-vindo(a), {{name}}!",
+  "description": "Vamos começar criando sua primeira lista de desejos. É simples e rápido!",
+  "step1": {
+    "title": "Crie sua lista",
+    "description": "Dê um nome à sua lista e adicione uma descrição opcional para ajudar seus amigos a entenderem o propósito."
+  },
+  "step2": {
+    "title": "Adicione itens",
+    "description": "Adicione os itens que você deseja, incluindo links, preços e imagens para facilitar a escolha."
+  },
+  "step3": {
+    "title": "Compartilhe",
+    "description": "Compartilhe o link da sua lista com amigos e familiares para que eles possam escolher os presentes."
+  },
+  "getStarted": "Começar Agora"
+} 

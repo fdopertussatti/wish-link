@@ -83,7 +83,9 @@
     "checkItems": "Confira os itens e faça uma surpresa especial"
   },
   "footer": {
-    "allRightsReserved": "Todos os direitos reservados"
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "rights": "Todos os direitos reservados"
   },
   "buttons": {
     "save": "Salvar",

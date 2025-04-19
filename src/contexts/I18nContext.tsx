@@ -9,6 +9,7 @@ interface I18nContextType {
   changeLocale: (locale: string) => void;
   availableLocales: { code: string; name: string }[];
   isLoading: boolean;
+  messages: Record<string, any>;
 }
 
 const availableLocales = [
@@ -26,121 +27,185 @@ interface I18nProviderProps {
   initialMessages?: Record<string, any>;
 }
 
+const loadMessagesForNamespace = async (locale: string, namespace: string) => {
+  try {
+    const module = await import(`../../messages/${locale}/${namespace}.json`);
+    return module.default;
+  } catch (e) {
+    // Only log warning if not falling back to English
+    if (locale !== 'en') {
+      console.warn(`Could not load ${namespace} messages for locale ${locale}, falling back to English`);
+      try {
+        const fallbackModule = await import(`../../messages/en/${namespace}.json`);
+        return fallbackModule.default;
+      } catch (fallbackError) {
+        console.error(`Could not load fallback English messages for ${namespace}:`, fallbackError);
+      }
+    } else {
+      console.error(`Could not load English messages for ${namespace}:`, e);
+    }
+    return null;
+  }
+};
+
 export function I18nProvider({ children, initialMessages = {} }: I18nProviderProps) {
   const pathname = usePathname();
   const [locale, setLocale] = useState<string>('en');
   const [messages, setMessages] = useState<Record<string, any>>(initialMessages);
   const [isLoading, setIsLoading] = useState(true);
+  const [fallbackMessages, setFallbackMessages] = useState<Record<string, any>>({});
 
   useEffect(() => {
-    // Primeiro verificar localStorage para preferência salva
     const storedLocale = localStorage.getItem('preferredLocale');
     if (storedLocale && availableLocales.some(loc => loc.code === storedLocale)) {
       setLocale(storedLocale);
-      return;
+    } else {
+      const browserLang = navigator.language;
+      const detectedLocale = availableLocales.find(loc => 
+        browserLang.startsWith(loc.code)
+      )?.code || 'en';
+      setLocale(detectedLocale);
     }
-    
-    // Se não houver preferência salva, detectar idioma do navegador
-    const browserLang = navigator.language;
-    const detectedLocale = availableLocales.find(loc => 
-      browserLang.startsWith(loc.code)
-    )?.code || 'en';
-    
-    setLocale(detectedLocale);
   }, []);
 
+  // Load English messages as fallback
   useEffect(() => {
-    async function loadMessages() {
-      setIsLoading(true);
-      try {
-        // Load common messages
-        const commonModule = await import(`../../messages/${locale}/common.json`);
-        
-        // Try to determine the current page to load page-specific messages
-        let pageMessages = {};
-        
-        // Extract the base page name
-        let pageName = 'home';
-        if (pathname === '/') {
-          pageName = 'home';
-        } else if (pathname.startsWith('/listas/') && pathname !== '/listas') {
-          pageName = 'list-details';
-        } else if (pathname.startsWith('/compartilhado')) {
-          pageName = 'shared-list';
-        } else if (pathname === '/listas') {
-          pageName = 'lists';
-        } else if (pathname === '/como-funciona') {
-          pageName = 'how-it-works';
-        }
-        
-        try {
-          // Try to load page-specific messages
-          const pageModule = await import(`../../messages/${locale}/${pageName}.json`);
-          pageMessages = pageModule.default;
-        } catch (e) {
-          console.warn(`Could not load messages for page ${pageName} in locale ${locale}`);
-        }
-        
-        setMessages({
-          common: commonModule.default,
-          [pageName]: pageMessages
-        });
-      } catch (e) {
-        console.error('Failed to load messages', e);
-      } finally {
-        setIsLoading(false);
+    const loadFallbackMessages = async () => {
+      const [commonMessages, authMessages] = await Promise.all([
+        loadMessagesForNamespace('en', 'common'),
+        loadMessagesForNamespace('en', 'auth')
+      ]);
+
+      const fallback: Record<string, any> = {};
+      if (commonMessages) fallback.common = commonMessages;
+      if (authMessages) fallback.auth = authMessages;
+      setFallbackMessages(fallback);
+    };
+
+    loadFallbackMessages();
+  }, []);
+
+  const loadMessages = async () => {
+    setIsLoading(true);
+    try {
+      const loadedMessages: Record<string, any> = {};
+
+      // Load common and auth messages first
+      const [commonMessages, authMessages] = await Promise.all([
+        loadMessagesForNamespace(locale, 'common'),
+        loadMessagesForNamespace(locale, 'auth')
+      ]);
+
+      if (commonMessages) loadedMessages.common = commonMessages;
+      if (authMessages) loadedMessages.auth = authMessages;
+      
+      // Determine current page
+      let pageName = 'home';
+      if (pathname === '/') {
+        pageName = 'home';
+      } else if (pathname.startsWith('/listas/') && pathname !== '/listas') {
+        pageName = 'list-details';
+      } else if (pathname.startsWith('/compartilhado')) {
+        pageName = 'shared-list';
+      } else if (pathname === '/listas') {
+        pageName = 'lists';
+      } else if (pathname === '/como-funciona') {
+        pageName = 'how-it-works';
+      } else if (pathname.startsWith('/auth/')) {
+        pageName = 'auth';
       }
+      
+      // Load page-specific messages
+      const pageMessages = await loadMessagesForNamespace(locale, pageName);
+      if (pageMessages) loadedMessages[pageName] = pageMessages;
+
+      setMessages(loadedMessages);
+    } catch (e) {
+      console.error('Error loading messages:', e);
+    } finally {
+      setIsLoading(false);
     }
-    
+  };
+
+  useEffect(() => {
     if (locale) {
       loadMessages();
     }
   }, [locale, pathname]);
 
   const changeLocale = (newLocale: string) => {
-    setLocale(newLocale);
-    // Store the locale preference in localStorage
-    localStorage.setItem('preferredLocale', newLocale);
-    // Get the current URL
-    const currentURL = window.location.href;
-    // Update the URL with the new locale parameter (this will be a client-side transition)
-    window.history.pushState({}, '', currentURL);
+    if (availableLocales.some(loc => loc.code === newLocale)) {
+      setMessages({});
+      setIsLoading(true);
+      localStorage.setItem('preferredLocale', newLocale);
+      setLocale(newLocale);
+    }
   };
 
-  // Translation function
   const t = (key: string, namespace = 'common', params?: Record<string, string | number>): string => {
-    // If messages are not loaded yet, return empty string to avoid flashing
-    if (!messages || !messages[namespace]) {
-      return '';
+    try {
+      // First try to get from current locale
+      const namespaceMessages = messages[namespace];
+      if (namespaceMessages) {
+        const keys = key.split('.');
+        let value = namespaceMessages;
+        
+        for (const k of keys) {
+          if (value === undefined || value === null) break;
+          value = value[k];
+        }
+
+        if (value !== undefined && value !== null) {
+          if (params) {
+            return Object.entries(params).reduce(
+              (str, [key, value]) => str.replace(`{${key}}`, String(value)),
+              value
+            );
+          }
+          return value;
+        }
+      }
+
+      // If not found, try fallback English messages
+      const fallbackNamespaceMessages = fallbackMessages[namespace];
+      if (fallbackNamespaceMessages) {
+        const keys = key.split('.');
+        let value = fallbackNamespaceMessages;
+        
+        for (const k of keys) {
+          if (value === undefined || value === null) break;
+          value = value[k];
+        }
+
+        if (value !== undefined && value !== null) {
+          if (params) {
+            return Object.entries(params).reduce(
+              (str, [key, value]) => str.replace(`{${key}}`, String(value)),
+              value
+            );
+          }
+          return value;
+        }
+      }
+
+      return key;
+    } catch (e) {
+      console.error(`Error translating key ${key} in namespace ${namespace}:`, e);
+      return key;
     }
-    
-    // Split the key by dots to access nested properties
-    const keys = key.split('.');
-    
-    // Get the namespace object
-    const namespaceObj = messages[namespace] || {};
-    
-    // Navigate through the object using the keys
-    let result = keys.reduce((obj, k) => (obj && obj[k] !== undefined ? obj[k] : undefined), namespaceObj);
-    
-    // If no translation found, return empty string to avoid flashing
-    if (result === undefined) {
-      return '';
-    }
-    
-    // If the result is a string and there are parameters, replace the placeholders
-    if (typeof result === 'string' && params) {
-      Object.entries(params).forEach(([paramKey, paramValue]) => {
-        result = result.replace(new RegExp(`{${paramKey}}`, 'g'), String(paramValue));
-      });
-    }
-    
-    return result;
   };
+
+  if (isLoading && !Object.keys(messages).length) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" key="loading">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600" />
+      </div>
+    );
+  }
 
   return (
-    <I18nContext.Provider value={{ locale, t, changeLocale, availableLocales, isLoading }}>
-      {!isLoading && children}
+    <I18nContext.Provider value={{ locale, t, changeLocale, availableLocales, isLoading, messages }}>
+      {children}
     </I18nContext.Provider>
   );
 }
@@ -153,7 +218,6 @@ export function useI18n() {
   return context;
 }
 
-// Create a withI18n HOC to make it easier to use the translation function in components
 export function withI18n<P extends object>(
   Component: React.ComponentType<P & { t: I18nContextType['t']; locale: string }>
 ) {
