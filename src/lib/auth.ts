@@ -19,36 +19,51 @@ declare module "next-auth" {
 
 // Validação de variáveis de ambiente apenas em desenvolvimento
 if (process.env.NODE_ENV === 'development') {
-  if (!process.env.GOOGLE_CLIENT_ID) throw new Error('GOOGLE_CLIENT_ID is not set');
-  if (!process.env.GOOGLE_CLIENT_SECRET) throw new Error('GOOGLE_CLIENT_SECRET is not set');
-  if (!process.env.FACEBOOK_CLIENT_ID) throw new Error('FACEBOOK_CLIENT_ID is not set');
-  if (!process.env.FACEBOOK_CLIENT_SECRET) throw new Error('FACEBOOK_CLIENT_SECRET is not set');
-  if (!process.env.APPLE_CLIENT_ID) throw new Error('APPLE_CLIENT_ID is not set');
-  if (!process.env.APPLE_CLIENT_SECRET) throw new Error('APPLE_CLIENT_SECRET is not set');
+  if (!process.env.GOOGLE_CLIENT_ID) console.warn('GOOGLE_CLIENT_ID is not set');
+  if (!process.env.GOOGLE_CLIENT_SECRET) console.warn('GOOGLE_CLIENT_SECRET is not set');
+  if (!process.env.FACEBOOK_CLIENT_ID) console.warn('FACEBOOK_CLIENT_ID is not set');
+  if (!process.env.FACEBOOK_CLIENT_SECRET) console.warn('FACEBOOK_CLIENT_SECRET is not set');
+  if (!process.env.APPLE_CLIENT_ID) console.warn('APPLE_CLIENT_ID is not set');
+  if (!process.env.APPLE_CLIENT_SECRET) console.warn('APPLE_CLIENT_SECRET is not set');
 }
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code"
-        }
-      }
-    }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID || '',
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || '',
-    }),
-    AppleProvider({
-      clientId: process.env.APPLE_CLIENT_ID || '',
-      clientSecret: process.env.APPLE_CLIENT_SECRET || '',
-    }),
+    // Adiciona o Google Provider apenas se as credenciais estiverem configuradas
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+      ? [
+          GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            authorization: {
+              params: {
+                prompt: "consent",
+                access_type: "offline",
+                response_type: "code"
+              }
+            }
+          })
+        ]
+      : []),
+    // Adiciona o Facebook Provider apenas se as credenciais estiverem configuradas
+    ...(process.env.FACEBOOK_CLIENT_ID && process.env.FACEBOOK_CLIENT_SECRET
+      ? [
+          FacebookProvider({
+            clientId: process.env.FACEBOOK_CLIENT_ID,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+          })
+        ]
+      : []),
+    // Adiciona o Apple Provider apenas se as credenciais estiverem configuradas
+    ...(process.env.APPLE_CLIENT_ID && process.env.APPLE_CLIENT_SECRET
+      ? [
+          AppleProvider({
+            clientId: process.env.APPLE_CLIENT_ID,
+            clientSecret: process.env.APPLE_CLIENT_SECRET,
+          })
+        ]
+      : []),
   ],
   pages: {
     signIn: "/auth/signin",

@@ -29,7 +29,9 @@ interface I18nProviderProps {
 
 const loadMessagesForNamespace = async (locale: string, namespace: string) => {
   try {
+    console.log(`Loading ${namespace} messages for locale ${locale}`);
     const module = await import(`../../messages/${locale}/${namespace}.json`);
+    console.log(`Successfully loaded ${namespace} messages for locale ${locale}:`, module.default);
     return module.default;
   } catch (e) {
     // Only log warning if not falling back to English
@@ -37,6 +39,7 @@ const loadMessagesForNamespace = async (locale: string, namespace: string) => {
       console.warn(`Could not load ${namespace} messages for locale ${locale}, falling back to English`);
       try {
         const fallbackModule = await import(`../../messages/en/${namespace}.json`);
+        console.log(`Successfully loaded fallback English messages for ${namespace}:`, fallbackModule.default);
         return fallbackModule.default;
       } catch (fallbackError) {
         console.error(`Could not load fallback English messages for ${namespace}:`, fallbackError);
@@ -71,6 +74,7 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
   // Load English messages as fallback
   useEffect(() => {
     const loadFallbackMessages = async () => {
+      console.log('Loading fallback English messages');
       const [commonMessages, authMessages] = await Promise.all([
         loadMessagesForNamespace('en', 'common'),
         loadMessagesForNamespace('en', 'auth')
@@ -79,6 +83,7 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
       const fallback: Record<string, any> = {};
       if (commonMessages) fallback.common = commonMessages;
       if (authMessages) fallback.auth = authMessages;
+      console.log('Fallback messages loaded:', fallback);
       setFallbackMessages(fallback);
     };
 
@@ -88,6 +93,7 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
   const loadMessages = async () => {
     setIsLoading(true);
     try {
+      console.log(`Loading messages for locale: ${locale}`);
       const loadedMessages: Record<string, any> = {};
 
       // Load common and auth messages first
@@ -119,6 +125,7 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
       const pageMessages = await loadMessagesForNamespace(locale, pageName);
       if (pageMessages) loadedMessages[pageName] = pageMessages;
 
+      console.log('Loaded messages:', loadedMessages);
       setMessages(loadedMessages);
     } catch (e) {
       console.error('Error loading messages:', e);
@@ -135,6 +142,7 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
 
   const changeLocale = (newLocale: string) => {
     if (availableLocales.some(loc => loc.code === newLocale)) {
+      console.log(`Changing locale from ${locale} to ${newLocale}`);
       setMessages({});
       setIsLoading(true);
       localStorage.setItem('preferredLocale', newLocale);
@@ -144,6 +152,8 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
 
   const t = (key: string, namespace = 'common', params?: Record<string, string | number>): string => {
     try {
+      console.log(`Translating key: ${key}, namespace: ${namespace}`);
+      
       // First try to get from current locale
       const namespaceMessages = messages[namespace];
       if (namespaceMessages) {
@@ -162,6 +172,7 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
               value
             );
           }
+          console.log(`Found translation for ${key}: ${value}`);
           return value;
         }
       }
@@ -184,10 +195,12 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
               value
             );
           }
+          console.log(`Found fallback translation for ${key}: ${value}`);
           return value;
         }
       }
 
+      console.log(`No translation found for ${key}, using key as fallback`);
       return key;
     } catch (e) {
       console.error(`Error translating key ${key} in namespace ${namespace}:`, e);
@@ -198,13 +211,22 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
   if (isLoading && !Object.keys(messages).length) {
     return (
       <div className="min-h-screen flex items-center justify-center" key="loading">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600" />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
       </div>
     );
   }
 
   return (
-    <I18nContext.Provider value={{ locale, t, changeLocale, availableLocales, isLoading, messages }}>
+    <I18nContext.Provider
+      value={{
+        locale,
+        t,
+        changeLocale,
+        availableLocales,
+        isLoading,
+        messages,
+      }}
+    >
       {children}
     </I18nContext.Provider>
   );
