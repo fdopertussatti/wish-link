@@ -16,11 +16,9 @@ const nextConfig = {
       'images-americas.ssl-images-amazon.com'
     ],
   },
-  i18n: {
-    locales: ['en', 'pt-BR', 'es', 'fr', 'zh'],
-    defaultLocale: 'en',
-    localeDetection: false
-  }
+  // Configuração para o App Router
+  output: 'standalone',
+  // Removendo a configuração i18n que não é compatível com o App Router
 }
 
 module.exports = nextConfig 
