@@ -8,9 +8,56 @@ export const defaultLocale = 'en';
 // Paths that don't require authentication
 const publicPaths = ['/', '/auth/signin', '/auth/signup', '/privacy', '/terms', '/how-it-works'];
 
+// Lista de cabeçalhos de segurança
+const securityHeaders = {
+  'X-DNS-Prefetch-Control': 'on',
+  'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+  'X-Frame-Options': 'DENY',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'X-XSS-Protection': '1; mode=block',
+  'Content-Security-Policy': [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' blob: data: https://images.unsplash.com https://*.amazonaws.com",
+    "font-src 'self' data:",
+    "connect-src 'self' https://vercel.live https://*.vercel.app",
+    "frame-src 'self'",
+  ].join('; '),
+};
+
 // Combine the auth middleware with i18n handling
 function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  let response = NextResponse.next();
+
+  // Aplicar cabeçalhos de segurança em todas as respostas
+  Object.entries(securityHeaders).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+
+  // Proteção básica contra ataques de CSRF
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    const requestOrigin = request.headers.get('origin');
+    const allowedOrigins = [process.env.NEXTAUTH_URL || ''].filter(Boolean);
+    
+    // Em desenvolvimento, aceitar localhost
+    if (process.env.NODE_ENV === 'development') {
+      allowedOrigins.push('http://localhost:3000');
+    }
+    
+    if (requestOrigin && !allowedOrigins.includes(requestOrigin)) {
+      return new NextResponse(null, {
+        status: 403,
+        statusText: 'Forbidden',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+      });
+    }
+  }
 
   // Check if the pathname is missing a locale
   const pathnameHasLocale = locales.some(
@@ -45,11 +92,11 @@ function middleware(request: NextRequest) {
 
   if (isPublicPath) {
     // Public paths just pass through after locale handling
-    return NextResponse.next();
+    return response;
   }
 
   // For protected paths, we'll use the auth middleware below
-  return NextResponse.next();
+  return response;
 }
 
 export default withAuth(middleware, {

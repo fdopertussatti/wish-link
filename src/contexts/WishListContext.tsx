@@ -4,7 +4,6 @@ import { createContext, useContext, ReactNode, useState, useEffect } from 'react
 import { WishList, WishItem } from '@/types';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { sampleWishList } from '@/utils/sampleData';
-import { useSession } from 'next-auth/react';
 
 interface WishListContextType {
   wishLists: WishList[];
@@ -22,42 +21,25 @@ interface WishListContextType {
 const WishListContext = createContext<WishListContextType | undefined>(undefined);
 
 export function WishListProvider({ children }: { children: ReactNode }) {
-  const { data: session, status } = useSession();
-  const [wishLists, setWishLists] = useLocalStorage<WishList[]>('wishLists', []);
+  const [wishLists, setWishLists] = useLocalStorage<WishList[]>('wishLists', [sampleWishList]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const loadWishLists = async () => {
-      setIsLoading(true);
-      try {
-        if (session?.user) {
-          // TODO: Substituir por chamada à API quando implementada
-          const userWishLists = wishLists.filter(list => list.userId === session.user.id);
-          setWishLists(userWishLists.length > 0 ? userWishLists : [sampleWishList]);
-        } else if (status === 'unauthenticated') {
-          setWishLists([]);
-        }
-      } catch (error) {
-        console.error('Error loading wishlists:', error);
-        setWishLists([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    // Simular um tempo de carregamento para demonstração
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
 
-    loadWishLists();
-  }, [session, status]);
+    return () => clearTimeout(timer);
+  }, []);
 
   const addWishList = (wishList: Omit<WishList, 'id' | 'createdAt'>) => {
-    if (!session?.user) return;
-    
     const newWishList: WishList = {
       ...wishList,
       id: crypto.randomUUID(),
-      createdAt: Date.now(),
-      userId: session.user.id
+      createdAt: Date.now()
     };
-    setWishLists(prevLists => [...prevLists, newWishList]);
+    setWishLists([...wishLists, newWishList]);
   };
 
   const updateWishList = (updatedList: WishList) => {

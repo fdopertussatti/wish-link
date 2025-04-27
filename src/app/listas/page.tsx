@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useWishList } from '@/contexts/WishListContext';
+import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { WishListForm } from '@/components/forms/WishListForm';
@@ -13,17 +14,11 @@ import { NewWishList } from '@/types';
 
 export default function WishLists() {
   const router = useRouter();
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push('/auth/signin?callbackUrl=/listas');
-    },
-  });
+  const { data: session, status } = useSession();
   const { wishLists, isLoading: isLoadingWishLists, addWishList } = useWishList();
+  const { t } = useI18n();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
-
-  const isLoading = status === 'loading' || isLoadingWishLists;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -40,7 +35,7 @@ export default function WishLists() {
     setIsModalOpen(false);
   };
 
-  if (isLoading) {
+  if (status === 'loading' || isLoadingWishLists) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="animate-pulse">
@@ -61,8 +56,8 @@ export default function WishLists() {
     );
   }
 
-  if (!session) {
-    return null;
+  if (status === 'unauthenticated') {
+    return null; // Will redirect in useEffect
   }
 
   return (
@@ -75,10 +70,10 @@ export default function WishLists() {
         </div>
         <div className="relative container mx-auto px-4 py-12">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Minhas Listas de Desejos
+            {t('hero.title', 'lists')}
           </h1>
           <p className="mt-3 text-lg text-purple-100 max-w-xl">
-            Gerencie suas listas e compartilhe com quem você ama
+            {t('hero.subtitle', 'lists')}
           </p>
         </div>
       </div>
@@ -99,7 +94,7 @@ export default function WishLists() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
               </svg>
-              Grade
+              {t('viewType.grid', 'lists')}
             </button>
             <button
               onClick={() => setViewType('list')}
@@ -112,7 +107,7 @@ export default function WishLists() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
               </svg>
-              Lista
+              {t('viewType.list', 'lists')}
             </button>
           </div>
 
@@ -120,7 +115,7 @@ export default function WishLists() {
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            Nova Lista
+            {t('newList.button', 'lists')}
           </Button>
         </div>
 
@@ -132,14 +127,13 @@ export default function WishLists() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
               </svg>
             </div>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">Nenhuma lista criada ainda</h3>
+            <h3 className="mt-4 text-lg font-medium text-gray-900">{t('emptyState.title', 'lists')}</h3>
             <p className="mt-2 text-gray-500 max-w-md mx-auto">
-              Crie sua primeira lista de desejos para começar a organizar seus itens favoritos e
-              compartilhar com amigos e família.
+              {t('emptyState.description', 'lists')}
             </p>
             <div className="mt-6">
               <Button onClick={() => setIsModalOpen(true)}>
-                Criar Minha Primeira Lista
+                {t('emptyState.createButton', 'lists')}
               </Button>
             </div>
           </div>

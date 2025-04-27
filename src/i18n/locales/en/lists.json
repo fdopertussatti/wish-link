@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "title": "My Wishlists",
+    "subtitle": "Create and manage all your wishlists in one place"
+  },
+  "viewType": {
+    "grid": "Grid",
+    "list": "List"
+  },
+  "newList": {
+    "button": "New List"
+  },
+  "emptyState": {
+    "title": "You don't have any wishlists yet",
+    "description": "Create your first wishlist to start organizing your wishes",
+    "createButton": "Create My First Wishlist"
+  },
+  "createModal": {
+    "title": "Create New Wishlist",
+    "name": "Wishlist Name",
+    "namePlaceholder": "e.g., Birthday, Wedding, Christmas...",
+    "description": "Description (optional)",
+    "descriptionPlaceholder": "A brief description about this wishlist",
+    "isPublic": "Make this wishlist public",
+    "publicExplanation": "Public wishlists can be viewed by anyone with the link",
+    "button": "Create Wishlist"
+  },
+  "deleteConfirm": {
+    "title": "Delete Wishlist?",
+    "description": "Are you sure you want to delete this wishlist? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Yes, Delete"
+  },
+  "listCard": {
+    "items": "{count} {count, plural, =1 {item} other {items}}",
+    "created": "Created on {date}",
+    "empty": "No items yet",
+    "viewDetails": "View Details",
+    "share": "Share",
+    "edit": "Edit",
+    "delete": "Delete"
+  }
+} 

@@ -1,0 +1,76 @@
+{
+  "hero": {
+    "title": "How <em>WishLink</em> works",
+    "subtitle": "Learn how to create, manage, and share your wishlists in a few simple steps."
+  },
+  "steps": [
+    {
+      "number": "01",
+      "title": "Create your list",
+      "description": "Choose a name for your list and add an optional description. You can create as many lists as you want."
+    },
+    {
+      "number": "02",
+      "title": "Add items",
+      "description": "Add products by pasting the store link or filling in manually. Set priorities and categories."
+    },
+    {
+      "number": "03",
+      "title": "Share",
+      "description": "Generate a unique link and share it with friends and family through any communication channel."
+    },
+    {
+      "number": "04",
+      "title": "No duplicate gifts",
+      "description": "When someone reserves an item, it's marked as reserved for everyone, avoiding duplications."
+    }
+  ],
+  "workflow": {
+    "title": "Complete flow",
+    "subtitle": "See how simple it is to use WishLink from start to finish.",
+    "phases": [
+      {
+        "title": "Creation",
+        "description": "Create your list and add the products of your dreams with all the information."
+      },
+      {
+        "title": "Sharing",
+        "description": "Share the unique link with friends and family via WhatsApp, email, or social media."
+      },
+      {
+        "title": "Reservations",
+        "description": "Your friends can reserve items, which are marked to avoid duplicate gifts."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "questions": [
+      {
+        "question": "Do I need to create an account?",
+        "answer": "No, WishLink doesn't require registration. Your lists are stored locally in your browser."
+      },
+      {
+        "question": "How much does it cost to use WishLink?",
+        "answer": "WishLink is completely free with no usage restrictions."
+      },
+      {
+        "question": "Where is my data stored?",
+        "answer": "Your data is stored locally in your browser through localStorage."
+      },
+      {
+        "question": "Can I access my list from another device?",
+        "answer": "Since it uses local storage, your lists are only available on the device where they were created. Share the link so others can view it."
+      },
+      {
+        "question": "Is it possible to edit a list after it's created?",
+        "answer": "Yes, you can add, edit, and remove items at any time."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to create your list?",
+    "description": "Start now and organize your wishes in one place",
+    "button": "Create My List"
+  }
+} 

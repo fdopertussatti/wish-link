@@ -30,7 +30,7 @@ interface I18nProviderProps {
 const loadMessagesForNamespace = async (locale: string, namespace: string) => {
   try {
     console.log(`Loading ${namespace} messages for locale ${locale}`);
-    const module = await import(`../../messages/${locale}/${namespace}.json`);
+    const module = await import(`../i18n/locales/${locale}/${namespace}.json`);
     console.log(`Successfully loaded ${namespace} messages for locale ${locale}:`, module.default);
     return module.default;
   } catch (e) {
@@ -38,7 +38,7 @@ const loadMessagesForNamespace = async (locale: string, namespace: string) => {
     if (locale !== 'en') {
       console.warn(`Could not load ${namespace} messages for locale ${locale}, falling back to English`);
       try {
-        const fallbackModule = await import(`../../messages/en/${namespace}.json`);
+        const fallbackModule = await import(`../i18n/locales/en/${namespace}.json`);
         console.log(`Successfully loaded fallback English messages for ${namespace}:`, fallbackModule.default);
         return fallbackModule.default;
       } catch (fallbackError) {
@@ -75,14 +75,18 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
   useEffect(() => {
     const loadFallbackMessages = async () => {
       console.log('Loading fallback English messages');
-      const [commonMessages, authMessages] = await Promise.all([
+      const [commonMessages, authMessages, privacyMessages, termsMessages] = await Promise.all([
         loadMessagesForNamespace('en', 'common'),
-        loadMessagesForNamespace('en', 'auth')
+        loadMessagesForNamespace('en', 'auth'),
+        loadMessagesForNamespace('en', 'privacy'),
+        loadMessagesForNamespace('en', 'terms')
       ]);
 
       const fallback: Record<string, any> = {};
       if (commonMessages) fallback.common = commonMessages;
       if (authMessages) fallback.auth = authMessages;
+      if (privacyMessages) fallback.privacy = privacyMessages;
+      if (termsMessages) fallback.terms = termsMessages;
       console.log('Fallback messages loaded:', fallback);
       setFallbackMessages(fallback);
     };
@@ -124,6 +128,17 @@ export function I18nProvider({ children, initialMessages = {} }: I18nProviderPro
       // Load page-specific messages
       const pageMessages = await loadMessagesForNamespace(locale, pageName);
       if (pageMessages) loadedMessages[pageName] = pageMessages;
+
+      // Load privacy and terms messages if on those pages
+      if (pathname === '/privacidade') {
+        const privacyMessages = await loadMessagesForNamespace(locale, 'privacy');
+        if (privacyMessages) loadedMessages.privacy = privacyMessages;
+      }
+      
+      if (pathname === '/termos') {
+        const termsMessages = await loadMessagesForNamespace(locale, 'terms');
+        if (termsMessages) loadedMessages.terms = termsMessages;
+      }
 
       console.log('Loaded messages:', loadedMessages);
       setMessages(loadedMessages);

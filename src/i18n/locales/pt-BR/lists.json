@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "title": "Minhas Listas de Desejos",
+    "subtitle": "Gerencie suas listas e compartilhe com quem você ama"
+  },
+  "viewType": {
+    "grid": "Grade",
+    "list": "Lista"
+  },
+  "newList": {
+    "button": "Nova Lista"
+  },
+  "emptyState": {
+    "title": "Nenhuma lista criada ainda",
+    "description": "Crie sua primeira lista de desejos para começar a organizar seus itens favoritos e compartilhar com amigos e família",
+    "createButton": "Criar Minha Primeira Lista"
+  },
+  "createModal": {
+    "title": "Criar Nova Lista",
+    "name": "Nome da Lista",
+    "namePlaceholder": "ex., Aniversário, Casamento, Natal...",
+    "description": "Descrição (opcional)",
+    "descriptionPlaceholder": "Uma breve descrição sobre esta lista",
+    "isPublic": "Tornar esta lista pública",
+    "publicExplanation": "Listas públicas podem ser vistas por qualquer pessoa com o link",
+    "button": "Criar Lista"
+  },
+  "deleteConfirm": {
+    "title": "Excluir Lista?",
+    "description": "Tem certeza que deseja excluir esta lista? Esta ação não pode ser desfeita.",
+    "cancel": "Cancelar",
+    "confirm": "Sim, Excluir"
+  },
+  "listCard": {
+    "items": "{count} {count, plural, =1 {item} other {itens}}",
+    "created": "Criada em {date}",
+    "empty": "Nenhum item ainda",
+    "viewDetails": "Ver Detalhes",
+    "share": "Compartilhar",
+    "edit": "Editar",
+    "delete": "Excluir"
+  }
+} 
