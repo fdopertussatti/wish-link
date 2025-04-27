@@ -15,10 +15,17 @@ const nextConfig = {
       'images-na.ssl-images-amazon.com',
       'images-americas.ssl-images-amazon.com'
     ],
-  },
-  // Configuração para o App Router
-  output: 'standalone',
-  // Removendo a configuração i18n que não é compatível com o App Router
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'pertussatti.com',
+        port: '',
+        pathname: '/**',
+      }
+    ],
+    unoptimized: true
+  }
+  // i18n configuration removed as it's not compatible with App Router
 }
 
 module.exports = nextConfig 
