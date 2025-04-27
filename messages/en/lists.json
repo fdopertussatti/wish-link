@@ -1,26 +1,33 @@
 {
   "hero": {
-    "title": "My Wishlists",
-    "subtitle": "Create and manage all your wishlists in one place"
+    "title": "My Wish Lists",
+    "subtitle": "Manage your lists and share with those you love"
+  },
+  "viewType": {
+    "grid": "Grid",
+    "list": "List"
+  },
+  "newList": {
+    "button": "New List"
   },
   "emptyState": {
-    "title": "You don't have any wishlists yet",
-    "description": "Create your first wishlist to start organizing your wishes",
-    "button": "Create Wishlist"
+    "title": "No lists created yet",
+    "description": "Create your first wish list to start organizing your favorite items and share with friends and family",
+    "createButton": "Create My First List"
   },
   "createModal": {
-    "title": "Create New Wishlist",
-    "name": "Wishlist Name",
+    "title": "Create New List",
+    "name": "List Name",
     "namePlaceholder": "e.g., Birthday, Wedding, Christmas...",
     "description": "Description (optional)",
-    "descriptionPlaceholder": "A brief description about this wishlist",
-    "isPublic": "Make this wishlist public",
-    "publicExplanation": "Public wishlists can be viewed by anyone with the link",
-    "button": "Create Wishlist"
+    "descriptionPlaceholder": "A brief description about this list",
+    "isPublic": "Make this list public",
+    "publicExplanation": "Public lists can be viewed by anyone with the link",
+    "button": "Create List"
   },
   "deleteConfirm": {
-    "title": "Delete Wishlist?",
-    "description": "Are you sure you want to delete this wishlist? This action cannot be undone.",
+    "title": "Delete List?",
+    "description": "Are you sure you want to delete this list? This action cannot be undone.",
     "cancel": "Cancel",
     "confirm": "Yes, Delete"
   },

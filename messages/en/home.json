@@ -1,20 +1,20 @@
 {
   "hero": {
     "title": "Your <em>wishes</em>, organized in one place",
-    "subtitle": "Create custom wishlists, share with your loved ones, and avoid duplicate or unwanted gifts."
+    "subtitle": "Create personalized lists, share with your loved ones, and avoid duplicate or unwanted gifts."
   },
   "cta": {
     "primary": "Create My List",
-    "secondary": "How it works"
+    "secondary": "How It Works"
   },
   "features": {
     "title": "Organize your wishes",
-    "subtitle": "Everything you need for a perfect wishlist",
-    "description": "With WishLink, creating and sharing wishlists has never been so easy and elegant.",
+    "subtitle": "Everything you need for a perfect wish list",
+    "description": "With WishLink, creating and sharing wish lists has never been easier or more elegant.",
     "items": [
       {
         "title": "Easy to Create",
-        "description": "Paste the link of any product from the web and we automatically fill in the details for you."
+        "description": "Paste the link of any product from the web and we'll automatically fill in the details for you."
       },
       {
         "title": "Share",
@@ -22,15 +22,15 @@
       },
       {
         "title": "Avoid Duplicates",
-        "description": "When someone reserves an item, it is marked for everyone, avoiding duplicate gifts."
+        "description": "When someone reserves an item, it gets marked for everyone, avoiding duplicate gifts."
       }
     ]
   },
   "showcase": {
     "title": "Elegant and intuitive design",
-    "description": "Our wishlists are visually appealing and easy to navigate. Organize by categories, set priorities, and add details that help your friends find the perfect gift.",
+    "description": "Our wish lists are visually appealing and easy to navigate. Organize by categories, set priorities, and add details that help your friends find the perfect gift.",
     "featureList": [
-      "Add items with price, image, and link to purchase",
+      "Add items with price, image, and purchase link",
       "Set priorities for each item",
       "Organize into categories for easy navigation",
       "Responsive design for desktop and mobile"
@@ -38,7 +38,7 @@
   },
   "callToAction": {
     "title": "Ready to organize your wishes?",
-    "description": "Create your first list in less than a minute. It's free, easy, and no signup required.",
+    "description": "Create your first list in less than a minute. It's free, easy, and doesn't require registration.",
     "button": "Start now",
     "freeTag": "Free",
     "benefits": [

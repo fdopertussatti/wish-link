@@ -1,0 +1,17 @@
+{
+  "welcome": "Welcome, {{name}}!",
+  "description": "Let's get started by creating your first wish list. It's simple and quick!",
+  "step1": {
+    "title": "Create your list",
+    "description": "Give your list a name and add an optional description to help your friends understand its purpose."
+  },
+  "step2": {
+    "title": "Add items",
+    "description": "Add the items you want, including links, prices, and images to make selection easier."
+  },
+  "step3": {
+    "title": "Share",
+    "description": "Share the link to your list with friends and family so they can choose gifts."
+  },
+  "getStarted": "Get Started Now"
+} 

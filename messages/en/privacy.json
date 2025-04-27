@@ -1,0 +1,135 @@
+{
+  "title": "Privacy Policy",
+  "content": {
+    "introduction": "Welcome to WishLink! This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the application.",
+    "informationWeCollect": {
+      "title": "Information We Collect",
+      "description": "We collect several types of information from and about users of our platform, including:",
+      "types": [
+        {
+          "title": "Account Information",
+          "description": "When you create an account, we collect your name, email address, password, and profile information."
+        },
+        {
+          "title": "User Content",
+          "description": "Information you provide when creating wish lists, including item names, descriptions, prices, URLs, and images."
+        },
+        {
+          "title": "Usage Information",
+          "description": "Information about how you use our service, including your browsing actions, search history, and interactions with other users."
+        },
+        {
+          "title": "Device Information",
+          "description": "We may collect information about the device you use to access our service, including the hardware model, operating system, unique device identifiers, and mobile network information."
+        },
+        {
+          "title": "Cookies and Similar Technologies",
+          "description": "We use cookies and similar tracking technologies to track activity on our platform and to hold certain information."
+        }
+      ]
+    },
+    "howWeUseInformation": {
+      "title": "How We Use Your Information",
+      "description": "We use the information we collect about you for various purposes, including:",
+      "purposes": [
+        {
+          "title": "Provide, maintain, and improve our services",
+          "description": "We use your information to provide the services you request, to maintain your account, and to improve the functionality of our platform."
+        },
+        {
+          "title": "Process transactions",
+          "description": "Your information allows us to process and complete transactions you request."
+        },
+        {
+          "title": "Send you technical notices, updates, and support messages",
+          "description": "We may send you technical notices, updates, security alerts, and support and administrative messages."
+        },
+        {
+          "title": "Communicate with you",
+          "description": "We may use your information to communicate with you about products, services, offers, promotions, and events, and provide other news or information about us and our partners."
+        },
+        {
+          "title": "Personalize your experience",
+          "description": "We may use your information to personalize your experience, including presenting tailored content and recommendations."
+        }
+      ]
+    },
+    "informationSharing": {
+      "title": "Information Sharing",
+      "description": "We may share your information in the following situations:",
+      "sharingPractices": [
+        {
+          "title": "With your consent",
+          "description": "We may share your information when you give us your consent to do so."
+        },
+        {
+          "title": "With service providers",
+          "description": "We may share your information with service providers who perform services on our behalf."
+        },
+        {
+          "title": "For legal purposes",
+          "description": "We may disclose your information in response to subpoenas, court orders, or other legal requirements."
+        },
+        {
+          "title": "To protect our rights",
+          "description": "We may disclose your information to protect the rights, property, or safety of us, our users, or others."
+        },
+        {
+          "title": "Business transfers",
+          "description": "We may share or transfer your information in connection with a merger, acquisition, reorganization, or sale of assets."
+        }
+      ]
+    },
+    "yourRights": {
+      "title": "Your Rights",
+      "description": "Depending on your location, you may have certain rights regarding your personal information, including:",
+      "rights": [
+        {
+          "title": "Access",
+          "description": "You may have the right to request access to the personal information we collect from you."
+        },
+        {
+          "title": "Correction",
+          "description": "You may have the right to request that we correct or update your personal information."
+        },
+        {
+          "title": "Deletion",
+          "description": "You may have the right to request that we delete your personal information."
+        },
+        {
+          "title": "Portability",
+          "description": "You may have the right to request that we transfer your personal information to another service provider."
+        },
+        {
+          "title": "Objection",
+          "description": "You may have the right to object to our processing of your personal information."
+        }
+      ]
+    },
+    "dataSecurity": {
+      "title": "Data Security",
+      "description": "We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure."
+    },
+    "internationalDataTransfers": {
+      "title": "International Data Transfers",
+      "description": "Our servers are located in various countries around the world. If you access our platform from outside these locations, be aware that your information may be transferred to, stored, and processed by us in our facilities and by those third parties with whom we may share your personal information."
+    },
+    "dataRetention": {
+      "title": "Data Retention",
+      "description": "We will retain your personal information only for as long as is necessary for the purposes set out in this privacy policy. We will retain and use your information to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our policies."
+    },
+    "childrenPrivacy": {
+      "title": "Children's Privacy",
+      "description": "Our service is not directed to anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we can take necessary actions."
+    },
+    "changes": {
+      "title": "Changes to This Privacy Policy",
+      "description": "We may update our privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page and updating the 'Last Updated' date. You are advised to review this privacy policy periodically for any changes."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "If you have any questions about this privacy policy, please contact us at privacy@wishlink.app."
+    }
+  },
+  "lastUpdated": "Last Updated: May 15, 2024"
+} 

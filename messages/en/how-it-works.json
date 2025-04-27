@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "How <em>WishLink</em> works",
-    "subtitle": "Learn how to create, manage, and share your wishlists in a few simple steps."
+    "subtitle": "Learn how to create, manage and share your wish lists in a few simple steps."
   },
   "steps": [
     {
@@ -22,16 +22,16 @@
     {
       "number": "04",
       "title": "No duplicate gifts",
-      "description": "When someone reserves an item, it's marked as reserved for everyone, avoiding duplications."
+      "description": "When someone reserves an item, it gets marked as reserved for everyone, avoiding duplications."
     }
   ],
   "workflow": {
-    "title": "Complete flow",
+    "title": "Complete workflow",
     "subtitle": "See how simple it is to use WishLink from start to finish.",
     "phases": [
       {
         "title": "Creation",
-        "description": "Create your list and add the products of your dreams with all the information."
+        "description": "Create your list and add your dream products with all the information."
       },
       {
         "title": "Sharing",
@@ -39,7 +39,7 @@
       },
       {
         "title": "Reservations",
-        "description": "Your friends can reserve items, which are marked to avoid duplicate gifts."
+        "description": "Your friends can reserve items, which get marked to avoid duplicate gifts."
       }
     ]
   },
