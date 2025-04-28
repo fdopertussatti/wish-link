@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withAuth } from 'next-auth/middleware';
 
 // Supported locales
 export const locales = ['en', 'pt-BR'];
 export const defaultLocale = 'en';
 
-// Paths that don't require authentication
+// Paths that don't require authentication (without locale prefix)
 const publicPaths = ['/', '/auth/signin', '/auth/signup', '/privacy', '/terms', '/how-it-works'];
 
 // Lista de cabeçalhos de segurança
@@ -28,15 +27,46 @@ const securityHeaders = {
   ].join('; '),
 };
 
-// Combine the auth middleware with i18n handling
-function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  let response = NextResponse.next();
+// Verificar se um caminho está na lista de caminhos públicos
+function isPathPublic(pathname: string): boolean {
+  // Primeiro, remover o prefixo de localidade se existir
+  let pathWithoutLocale = pathname;
+  
+  for (const locale of locales) {
+    if (pathname.startsWith(`/${locale}/`)) {
+      pathWithoutLocale = pathname.replace(`/${locale}`, '');
+      break;
+    } else if (pathname === `/${locale}`) {
+      pathWithoutLocale = '/';
+      break;
+    }
+  }
+  
+  // Verificar se o caminho (sem prefixo de localidade) está na lista de caminhos públicos
+  return publicPaths.some(path => 
+    pathWithoutLocale === path || 
+    pathWithoutLocale.startsWith(`${path}/`)
+  );
+}
 
-  // Aplicar cabeçalhos de segurança em todas as respostas
+// Adicionar cabeçalhos de segurança à resposta
+function addSecurityHeaders(response: NextResponse): NextResponse {
   Object.entries(securityHeaders).forEach(([key, value]) => {
     response.headers.set(key, value);
   });
+  return response;
+}
+
+// Middleware principal
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  
+  // Verificar se o caminho atual é público
+  const isPublic = isPathPublic(pathname);
+  
+  // Aplicar cabeçalhos de segurança em todas as respostas
+  let response = NextResponse.next();
+  response = addSecurityHeaders(response);
 
   // Proteção básica contra ataques de CSRF
   if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -64,12 +94,6 @@ function middleware(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  // Public paths don't need auth, only locale handling
-  const isPublicPath = publicPaths.some(path => 
-    pathname === path || 
-    pathname.startsWith(path + '/')
-  );
-
   if (!pathnameHasLocale) {
     // Determine locale from various sources
     let locale = defaultLocale;
@@ -90,23 +114,27 @@ function middleware(request: NextRequest) {
     return NextResponse.redirect(newUrl);
   }
 
-  if (isPublicPath) {
-    // Public paths just pass through after locale handling
+  // Se o caminho for público, não verificar autenticação
+  if (isPublic) {
     return response;
   }
 
-  // For protected paths, we'll use the auth middleware below
+  // Se chegou aqui, o caminho requer autenticação
+  
+  // Verificar token JWT nas cookies
+  const authToken = request.cookies.get('next-auth.session-token')?.value || 
+                     request.cookies.get('__Secure-next-auth.session-token')?.value;
+  
+  if (!authToken) {
+    // Redirecionar para login se não houver token
+    const signInUrl = new URL('/auth/signin', request.url);
+    signInUrl.searchParams.set('callbackUrl', request.url);
+    return NextResponse.redirect(signInUrl);
+  }
+  
+  // Token existe, permitir acesso
   return response;
 }
-
-export default withAuth(middleware, {
-  callbacks: {
-    authorized: ({ token }) => !!token,
-  },
-  pages: {
-    signIn: '/auth/signin',
-  },
-});
 
 export const config = {
   // Match all routes except for
