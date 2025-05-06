@@ -78,7 +78,7 @@ export default function WishListDetail() {
       <WishListHeader
         wishList={wishList}
         onShare={handleShare}
-        onAddItem={() => setIsModalOpen(true)}
+        onAddItem={() => router.push(`/listas/${wishList.id}/adicionar`)}
       />
 
       <main className="container mx-auto px-4 py-8">
@@ -159,10 +159,7 @@ export default function WishListDetail() {
                     key={item.id}
                     item={item}
                     onReserve={() => toggleItemReserved(wishList.id, item.id)}
-                    onEdit={() => {
-                      setEditingItem(item);
-                      setIsModalOpen(true);
-                    }}
+                    onEdit={() => router.push(`/listas/${wishList.id}/editar/${item.id}`)}
                     onDelete={() => deleteItem(wishList.id, item.id)}
                   />
                 ))}
@@ -249,10 +246,7 @@ export default function WishListDetail() {
                         )}
 
                         <button
-                          onClick={() => {
-                            setEditingItem(item);
-                            setIsModalOpen(true);
-                          }}
+                          onClick={() => router.push(`/listas/${wishList.id}/editar/${item.id}`)}
                           className="p-2 rounded-lg text-gray-500 hover:bg-gray-100"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -291,7 +285,7 @@ export default function WishListDetail() {
                 : 'Comece adicionando seu primeiro item à lista'}
             </p>
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => router.push(`/listas/${wishList.id}/adicionar`)}
               className="mt-6 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
             >
               Adicionar Primeiro Item

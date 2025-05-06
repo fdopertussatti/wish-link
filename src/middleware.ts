@@ -4,8 +4,23 @@ import { NextRequest, NextResponse } from 'next/server';
 export const locales = ['en', 'pt-BR'];
 export const defaultLocale = 'en';
 
+// Flag para desabilitar autenticação durante o desenvolvimento
+// Pode ser controlado pela variável de ambiente DISABLE_AUTH=true
+const isAuthDisabled = process.env.DISABLE_AUTH === 'true';
+
 // Paths that don't require authentication (without locale prefix)
-const publicPaths = ['/', '/auth/signin', '/auth/signup', '/privacy', '/terms', '/how-it-works'];
+// Rotas públicas atualizadas para combinar com a estrutura real
+const publicPaths = [
+  '/',
+  '/auth/signin',
+  '/auth/signup',
+  '/como-funciona',    // Caminho real da pasta da página "Como Funciona"
+  '/privacidade',      // Caminho real da pasta da página de privacidade
+  '/termos',           // Caminho real da pasta da página de termos
+  '/privacy',          // Caminhos alternativos para URLs em inglês
+  '/terms',
+  '/how-it-works'
+];
 
 // Lista de cabeçalhos de segurança
 const securityHeaders = {
@@ -29,6 +44,12 @@ const securityHeaders = {
 
 // Verificar se um caminho está na lista de caminhos públicos
 function isPathPublic(pathname: string): boolean {
+  // Se a autenticação estiver desabilitada, todos os caminhos são considerados públicos
+  if (isAuthDisabled) {
+    console.log(`Auth is disabled. Treating ${pathname} as public.`);
+    return true;
+  }
+
   // Primeiro, remover o prefixo de localidade se existir
   let pathWithoutLocale = pathname;
   
@@ -42,9 +63,16 @@ function isPathPublic(pathname: string): boolean {
     }
   }
   
-  // Verificar se o caminho (sem prefixo de localidade) está na lista de caminhos públicos
+  // Debug para ajudar na solução de problemas (remover em produção)
+  console.log(`Original path: ${pathname}, Without locale: ${pathWithoutLocale}`);
+  
+  // Verificar caminho exato primeiro
+  if (publicPaths.includes(pathWithoutLocale)) {
+    return true;
+  }
+  
+  // Depois verificar caminhos que começam com o padrão público
   return publicPaths.some(path => 
-    pathWithoutLocale === path || 
     pathWithoutLocale.startsWith(`${path}/`)
   );
 }
@@ -61,8 +89,12 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
+  // Para depuração: logar todos os caminhos
+  console.log(`Middleware processing path: ${pathname}`);
+  
   // Verificar se o caminho atual é público
   const isPublic = isPathPublic(pathname);
+  console.log(`Path ${pathname} is public: ${isPublic}`);
   
   // Aplicar cabeçalhos de segurança em todas as respostas
   let response = NextResponse.next();
@@ -94,7 +126,9 @@ export default function middleware(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (!pathnameHasLocale) {
+  // Se o caminho for público e não tiver localidade, não redirecionar
+  // Isso permite acessar caminhos públicos sem o prefixo de idioma
+  if (!pathnameHasLocale && !isPublic) {
     // Determine locale from various sources
     let locale = defaultLocale;
     

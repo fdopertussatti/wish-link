@@ -88,6 +88,41 @@
     "rights": "Todos os direitos reservados",
     "madeBy": "Por"
   },
+  "cookies": {
+    "title": "Este site usa cookies",
+    "description": {
+      "eu": "Usamos cookies para melhorar sua experiência de navegação, personalizar conteúdo e anúncios, além de analisar nosso tráfego. Ao continuar navegando, você concorda com a nossa Política de Privacidade conforme os requisitos do GDPR.",
+      "br": "Usamos cookies para melhorar sua experiência de navegação, personalizar conteúdo e anúncios, além de analisar nosso tráfego. Ao continuar navegando, você concorda com a nossa Política de Privacidade conforme a LGPD.",
+      "other": "Usamos cookies para melhorar sua experiência de navegação, personalizar conteúdo e anúncios, além de analisar nosso tráfego. Ao continuar navegando, você concorda com a nossa Política de Privacidade."
+    },
+    "customize": "Personalizar",
+    "acceptAll": "Aceitar Todos",
+    "rejectAll": "Rejeitar Não-Essenciais",
+    "savePreferences": "Salvar Preferências",
+    "back": "Voltar",
+    "privacyPolicy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "preferences": {
+      "title": "Preferências de Cookies",
+      "description": "Gerencie suas preferências de cookies. Cookies necessários ajudam a tornar um site utilizável, habilitando funções básicas.",
+      "necessary": {
+        "title": "Necessários",
+        "description": "Estes cookies são necessários para o funcionamento do site e não podem ser desativados."
+      },
+      "analytics": {
+        "title": "Analíticos",
+        "description": "Estes cookies nos ajudam a entender como os visitantes interagem com nosso site."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Estes cookies são usados para rastrear visitantes em sites para exibir anúncios relevantes."
+      },
+      "functional": {
+        "title": "Preferências",
+        "description": "Estes cookies permitem recursos e funcionalidades personalizados."
+      }
+    }
+  },
   "buttons": {
     "save": "Salvar",
     "cancel": "Cancelar",

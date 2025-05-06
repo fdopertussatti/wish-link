@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { useWishList } from '@/contexts/WishListContext';
 import { useI18n } from '@/contexts/I18nContext';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { WishListForm } from '@/components/forms/WishListForm';
@@ -14,18 +14,19 @@ import { NewWishList } from '@/types';
 
 export default function WishLists() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { isAuthenticated, isLoading: isLoadingAuth, isAuthDisabled } = useAuth();
   const { wishLists, isLoading: isLoadingWishLists, addWishList } = useWishList();
   const { t } = useI18n();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    // Somente redirecionar se a autenticação estiver habilitada e o usuário não estiver autenticado
+    if (!isLoadingAuth && !isAuthenticated && !isAuthDisabled) {
       router.push('/auth/signin?callbackUrl=/listas');
       return;
     }
-  }, [status, router]);
+  }, [isAuthenticated, isLoadingAuth, router, isAuthDisabled]);
 
   const handleCreateList = (data: NewWishList) => {
     addWishList({
@@ -35,7 +36,8 @@ export default function WishLists() {
     setIsModalOpen(false);
   };
 
-  if (status === 'loading' || isLoadingWishLists) {
+  // Mostrar estado de carregamento se estiver carregando autenticação ou listas
+  if (isLoadingAuth || isLoadingWishLists) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="animate-pulse">
@@ -56,7 +58,8 @@ export default function WishLists() {
     );
   }
 
-  if (status === 'unauthenticated') {
+  // Não mostrar nada se não estiver autenticado (e a autenticação não estiver desabilitada)
+  if (!isAuthenticated && !isAuthDisabled) {
     return null; // Will redirect in useEffect
   }
 
@@ -77,6 +80,24 @@ export default function WishLists() {
           </p>
         </div>
       </div>
+      
+      {/* Exibir notificação se a autenticação estiver desabilitada */}
+      {isAuthDisabled && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4 mx-4 mt-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <p className="text-sm text-yellow-700">
+                Modo de desenvolvimento: autenticação desabilitada
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="container mx-auto px-4 py-8">
         {/* Action bar */}
@@ -138,6 +159,18 @@ export default function WishLists() {
             </div>
           </div>
         )}
+
+        {/* Modal para criar lista */}
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={t('newList.title', 'Nova Lista de Desejos')}
+        >
+          <WishListForm
+            onSubmit={handleCreateList}
+            onCancel={() => setIsModalOpen(false)}
+          />
+        </Modal>
 
         {/* Grid View */}
         {viewType === 'grid' && wishLists.length > 0 && (
@@ -289,14 +322,6 @@ export default function WishLists() {
             ))}
           </div>
         )}
-
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          title="Nova Lista de Desejos"
-        >
-          <WishListForm onSubmit={handleCreateList} />
-        </Modal>
       </main>
     </div>
   );

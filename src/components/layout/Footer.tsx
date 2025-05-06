@@ -46,8 +46,8 @@ export function Footer() {
   return (
     <footer className="w-full border-t border-gray-200 dark:border-gray-700 py-6 mt-auto">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center mb-4 md:mb-0">
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex items-center">
             <div className="flex items-center">
               <span className="text-sm text-gray-500 dark:text-gray-400 mr-2">{translate('madeBy')}</span>
               <Image 
@@ -59,16 +59,14 @@ export function Footer() {
               />
             </div>
           </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            <p>© 2024 WishLink. {translate('rights')}</p>
-            <div className="flex space-x-4 mt-2">
-              <Link href="/privacy" className="hover:text-primary">
-                {translate('privacy')}
-              </Link>
-              <Link href="/terms" className="hover:text-primary">
-                {translate('terms')}
-              </Link>
-            </div>
+          <div className="flex items-center">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mr-4">© 2024 WishLink. {translate('rights')}</p>
+            <Link href="/privacy" className="text-sm text-gray-500 dark:text-gray-400 hover:text-primary mr-4">
+              {translate('privacy')}
+            </Link>
+            <Link href="/terms" className="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">
+              {translate('terms')}
+            </Link>
           </div>
         </div>
       </div>

@@ -9,6 +9,9 @@ import { LocaleHtmlLang } from '@/components/layout/LocaleHtmlLang';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
 import './globals.css';
+import { WishListProvider } from '@/contexts/WishListContext';
+import { CookieConsent } from '@/components/CookieConsent';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,13 +28,16 @@ export default function RootLayout({
             <SessionProvider>
               <LocaleHtmlLang />
               <PerformanceMonitor />
-              <div className="min-h-screen flex flex-col">
-                <Navbar />
-                <main className="flex-grow">
-                  {children}
-                </main>
-                <Footer />
-              </div>
+              <WishListProvider>
+                <div className="min-h-screen flex flex-col">
+                  <Navbar />
+                  <main className="flex-grow">
+                    {children}
+                  </main>
+                  <Footer />
+                  <CookieConsent />
+                </div>
+              </WishListProvider>
             </SessionProvider>
           </I18nProvider>
         </ErrorBoundary>

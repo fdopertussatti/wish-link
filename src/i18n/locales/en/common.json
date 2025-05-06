@@ -88,6 +88,41 @@
     "rights": "All rights reserved",
     "madeBy": "Made by"
   },
+  "cookies": {
+    "title": "This site uses cookies",
+    "description": {
+      "eu": "We use cookies to enhance your browsing experience, personalize content and ads, and analyze our traffic. By continuing, you consent to our use of cookies in accordance with our Privacy Policy and GDPR requirements.",
+      "br": "We use cookies to enhance your browsing experience, personalize content and ads, and analyze our traffic. By continuing, you consent to our use of cookies in accordance with our Privacy Policy and LGPD requirements.",
+      "other": "We use cookies to enhance your browsing experience, personalize content and ads, and analyze our traffic. By continuing, you consent to our use of cookies in accordance with our Privacy Policy."
+    },
+    "customize": "Customize",
+    "acceptAll": "Accept All",
+    "rejectAll": "Reject Non-Essential",
+    "savePreferences": "Save Preferences",
+    "back": "Back",
+    "privacyPolicy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "preferences": {
+      "title": "Cookie Preferences",
+      "description": "Manage your cookie preferences. Necessary cookies help make a website usable by enabling basic functions.",
+      "necessary": {
+        "title": "Necessary",
+        "description": "These cookies are required for the website to function and cannot be disabled."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "These cookies help us understand how visitors interact with our website."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "These cookies are used to track visitors across websites to display relevant advertisements."
+      },
+      "functional": {
+        "title": "Preferences",
+        "description": "These cookies enable personalized features and functionality."
+      }
+    }
+  },
   "buttons": {
     "save": "Save",
     "cancel": "Cancel",
